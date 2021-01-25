@@ -26,25 +26,22 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-vector<int> solve()
+void solve()
 {
-   vector<int> arr = {1,2,3,2,4,6};
-   int break_index;
-   for(int i =0;i<arr.size()-1;i++){
-       if(arr[i+1]<arr[i]){break_index=i;break;}
-   }
-   int start1=0;
-   int start2 = break_index+1;
-   vector<int> result;
-   while(start1<break_index||start2<arr.size()){
-       if(arr[start1]<arr[start2]){
-           result.push_back(arr[start1++]);
-       }
-       else{
-           result.push_back(arr[start1++]);
-       }
-   }
-   return result;
+    int n,k;
+    cin>>n>>k;
+    vector<int> arr(n,0);
+    vector<int> arr_final(n,0);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    for(int i =0;i<n;i++){
+        arr_final[(i+k)%n] = arr[i];
+    }
+    for(int i=0;i<n;i++){
+        cout<<arr_final[i]<<" ";
+    }
+    cout<<endl;
 }
 
 int main()

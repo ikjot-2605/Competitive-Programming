@@ -28,22 +28,41 @@ using namespace std;
 
 void solveA()
 {
-    
+   string s;
+   cin>>s;
+   int n = s.length();
+   if(n%2==1){
+       cout<<"NO"<<endl;
+       return;
+   }
+   if(s[0]==')'||s[n-1]=='('){
+       cout<<"NO"<<endl;
+       return;
+   }
+   cout<<"YES"<<endl;
+   return;
 }
 void solveB(){
-
-}
-void solveC(){
-
-}
-void solveD(){
-
-}
-void solveE(){
-
-}
-void solveF(){
-
+    int n,m;
+    cin >> n;
+    int max1 = 0;
+    int max2 = 0;
+    int curr= 0;
+    vector<int> r(n);
+    for(int i = 0;i<n;i++){
+        cin>>r[i];
+        curr+=r[i];
+        max1= max(max1,curr);
+    }
+    curr=0;
+    cin>>m;
+    vector<int> b(m);
+    for(int i = 0;i<m;i++){
+        cin>>b[i];
+        curr+=b[i];
+        max2= max(max2,curr);
+    }
+    cout<<max1+max2<<endl;
 }
 
 int main()
@@ -55,7 +74,7 @@ int main()
     cin >> T;
     while (T--)
     {
-        solveA();
+        solveB();
     }
 
     return 0;

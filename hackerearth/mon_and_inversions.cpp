@@ -26,24 +26,27 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-void solveA()
+void solve()
 {
-    
-}
-void solveB(){
-
-}
-void solveC(){
-
-}
-void solveD(){
-
-}
-void solveE(){
-
-}
-void solveF(){
-
+    int n;
+    cin>>n;
+    vector<vector<int>> arr(n,vector<int>(n,0));
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<n;j++){
+            cin>>arr[i][j];
+        }
+    }
+    int count = 0;
+    for(int i=0;i<n;i++){
+        for(int j= 0 ;j<n;j++){
+            for(int k = i;k<n;k++){
+                for(int l = j;l<n;l++){
+                    if(arr[i][j]>arr[k][l])count++;
+                }
+            }
+        }
+    }
+    cout<<count<<endl;
 }
 
 int main()
@@ -55,7 +58,7 @@ int main()
     cin >> T;
     while (T--)
     {
-        solveA();
+        solve();
     }
 
     return 0;

@@ -26,24 +26,9 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-void solveA()
+void solve()
 {
     
-}
-void solveB(){
-
-}
-void solveC(){
-
-}
-void solveD(){
-
-}
-void solveE(){
-
-}
-void solveF(){
-
 }
 
 int main()
@@ -55,7 +40,7 @@ int main()
     cin >> T;
     while (T--)
     {
-        solveA();
+        solve();
     }
 
     return 0;

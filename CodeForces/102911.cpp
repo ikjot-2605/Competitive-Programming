@@ -28,22 +28,27 @@ using namespace std;
 
 void solveA()
 {
-    
-}
-void solveB(){
-
-}
-void solveC(){
-
-}
-void solveD(){
-
-}
-void solveE(){
-
-}
-void solveF(){
-
+   priority_queue<int> pq;
+   int n;
+   cin>>n;
+   for(int i =0;i<n;i++){
+       int a;
+       cin>>a;
+       pq.push(a);
+   } 
+   vector<int> ans;
+   vector<int> finalans;
+   int prev =0;
+   for(int i =0;i<n;i++){
+       int a = (pq.top());
+       pq.pop();
+       ans.push_back(a-prev);
+       prev = a;
+   }
+   for(int i =0;i<n;i++){
+       cout<<ans[i]<<" ";
+   }
+   cout<<endl;
 }
 
 int main()
@@ -52,7 +57,7 @@ int main()
     cin.tie(NULL);
 
     int T = 1;
-    cin >> T;
+    //cin >> T;
     while (T--)
     {
         solveA();
