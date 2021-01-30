@@ -2,8 +2,6 @@
 /*COMPETITIVE PROGRAMMING C++ TEMPLATE */
 
 
-#include <algorithm>
-#include <vector>
 #include <set>
 #include <map>
 #include <unordered_map>
@@ -27,8 +25,9 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-void solveA(){
-	
+void solveA()
+{
+        vector<int> vec;
 }
 void solveB(){
 

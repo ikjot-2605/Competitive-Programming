@@ -1,7 +1,6 @@
 
 /*COMPETITIVE PROGRAMMING C++ TEMPLATE */
 
-
 #include <algorithm>
 #include <vector>
 #include <set>
@@ -27,23 +26,17 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-void solveA(){
-	
-}
-void solveB(){
 
-}
-void solveC(){
-
-}
-void solveD(){
-
-}
-void solveE(){
-
-}
-void solveF(){
-
+int numberOfMatches(int n) {
+    if(n==1){
+      return 0;
+    }        
+    else if(n%2==0){
+      return n/2 + numberOfMatches(n/2);
+    }
+    else{
+      return (n-1)/2+numberOfMatches((n-1)/2 + 1);
+    }
 }
 
 int main()
@@ -55,7 +48,9 @@ int main()
     cin >> T;
     while (T--)
     {
-        solveA();
+      int n ;
+      cin>>n;
+      cout<<  numberOfMatches(n)<<endl;
     }
 
     return 0;
