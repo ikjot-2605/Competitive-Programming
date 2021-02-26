@@ -67,13 +67,33 @@ void solveB(){
     int j =0 ;
     int ans = 0;
     for(int i =0;i<n;i++){
-        while(j<m-1 && abs(a[i]-b[j])>=abs(a[i]-b[j+1])) j++;
+        while(j<m-1 && (abs(a[i]-b[j]))>=abs(a[i]-b[j+1])) j++;
         ans =max(ans,abs(a[i]-b[j]));
     }
     cout<<ans<<endl;
 }
 void solveC(){
-
+    int n;
+    cin>>n;
+    vector<int> sizes(n);
+    for(int i =0;i<n;i++){
+        cin>>sizes[i];
+    }
+    sort(sizes.begin(),sizes.end(),greater<int>());
+    set<int> taken_indices;
+    for(int i = 0;i<n;i++){
+        if(taken_indices.find(i)==taken_indices.end()){
+            int cursize = sizes[i];
+            vector<int>::iterator it,temp;
+            temp = upper_bound(sizes.begin(),sizes.end(),2);
+            it = upper_bound(sizes.begin(),sizes.end(),cursize/2);
+            int x = *it;
+            int y = *temp;
+            //some nonsense
+            taken_indices.insert(it-sizes.begin());
+        }    
+    }
+    cout<<n-taken_indices.size()<<endl;
 }
 void solveD(){
 
@@ -94,7 +114,7 @@ int main()
     //cin >> T;
     while (T--)
     {
-        solveB();
+        solveC();
     }
 
     return 0;
