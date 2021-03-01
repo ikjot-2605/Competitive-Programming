@@ -60,6 +60,22 @@ class Node{
             if(head==NULL){return 0;}
             return max(height(head->left),height(head->right))+1;
         }
+        Node* getNode(int data,Node *head){
+            queue<Node*> q;
+            q.push(head);
+            while(!q.empty()){
+                Node *temp = q.front();
+                q.pop();
+                if(temp->data == data){
+                    return temp;
+                }
+                else{
+                    if(temp->left!=NULL)q.push(temp->left);
+                    if(temp->right!=NULL)q.push(temp->right);
+                }
+            }
+            return NULL;
+        }
 };
 int main(){
     Node *root;
@@ -100,7 +116,15 @@ int main(){
         }
         else if (type == 2)
         {
-            cout << "Here is the height of the binary tree : " << root->height(root) - 1<<endl; 
+            int node;
+            cout<<"Enter the node whose height is needed : ";
+            cin >> node;
+            Node *getNode = root->getNode(node,root);
+            if(getNode == NULL){
+                cout<<"No node found!"<<endl;
+                continue;
+            }
+            cout << "Here is the height of the binary tree : " << getNode->height(getNode) - 1<<endl; 
         }
         else if (type == 3)
         {
