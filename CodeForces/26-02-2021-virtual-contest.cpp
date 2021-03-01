@@ -72,6 +72,7 @@ void solveB(){
     }
     cout<<ans<<endl;
 }
+
 void solveC(){
     int n;
     cin>>n;
