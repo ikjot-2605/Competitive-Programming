@@ -22,7 +22,7 @@ void minimum_spanning_tree(Graph *graph){
                     continue;
                 }
                 else{
-                    if(min_weight>graph->matrix[*it][i]&&graph->matrix[*it][i]!=INT_MIN){
+                    if(min_weight>graph->matrix[*it][i]&&graph->matrix[*it][i]!=0){
                         min_weight = graph->matrix[*it][i];
                         min_edge = {*it,i};
                     }
@@ -47,58 +47,14 @@ int main()
     int number_of_vertices;
     cin>>number_of_vertices;
     graph->vertices = number_of_vertices;
-    vector<vector<int>> temp( number_of_vertices , vector<int> (number_of_vertices, INT_MIN)); 
+    cout<<"Kindly input the cost adjacency matrix : \n";
+    vector<vector<int>> temp( number_of_vertices , vector<int> (number_of_vertices, INT_MIN));
+    for(int i = 0 ;i<number_of_vertices;i++){
+        for(int j = 0;j<number_of_vertices;j++){
+            cin>>temp[i][j];
+        }
+    } 
     graph->matrix = temp;
-    cout << "Welcome to the C++ Graphs - MST Program - Lab - 12(Listed Below are the available operations you can perform)" << endl;
-    cout << "Press 1 to insert an edge into the Graph" << endl;
-    cout << "Press 2 to obtain MST for current Graph."<<endl;
-    cout << "Press 0 to exit the program." << endl
-         << endl;
-
-
-    while (true)
-    {
-        cout << "Enter your operation type : ";
-        int type;
-        cin >> type;
-        cin.ignore(1, '\n');
-        if (type == 0)
-        {
-            cout << "Thank you. Exiting." << endl
-                 << endl;
-            break;
-        }
-        if (type == 1)
-        {
-            cout<< "Kindly input starting node : ";
-            char start_node;
-            cin>>start_node;
-            cout<<"Kindly input a destination node : ";
-            char end_node;
-            cin>>end_node;
-            if(graph->matrix[start_node-97][end_node-97]!=INT_MIN){
-                cout<<"The edge exists already.\n";
-            }
-            else{
-                cout<<"Kindly input the weight of the edge : ";
-                int weight_of_edge;
-                cin>>weight_of_edge;
-                if(weight_of_edge==INT_MIN){
-                    cout<<"Edge weight too low, try again.\n";
-                    continue;
-                }
-                graph->matrix[start_node-97][end_node-97] = weight_of_edge;
-                graph->matrix[end_node-97][start_node-97] = weight_of_edge;
-                cout<<"The edge from "<<start_node<<" to "<<end_node<<" of weight "<< weight_of_edge<<" has been added!\n";
-            }
-        }
-        else if(type == 2){
-            cout<<"Here is the Minimum Spanning tree edge List : "<<endl;
+    cout<<"Here is the Minimum Spanning tree edge List : "<<endl;
             minimum_spanning_tree(graph);
-        }
-        else
-        {
-            cout << "Kindly enter a valid choice." << endl;
-        }
-    }
 }
