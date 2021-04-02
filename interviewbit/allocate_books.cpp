@@ -1,16 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
-bool possible(vector<int> &P, int M, int thresold){
-    int n = P.size();
+bool possible(vector<int> &A, int B, int thresold){
+    int n = A.size();
     int k = 1, pages=0;
 
     for(int i=0; i<n; i++){
-        pages += P[i];
+        pages += A[i];
         if(pages > thresold){
             pages = 0;
             k += 1;
             i -= 1;
-            if(k > M){
+            if(k > B){
                 return false;
             }
         }
@@ -18,16 +18,16 @@ bool possible(vector<int> &P, int M, int thresold){
     return true;
 }
 
-int books(vector<int> &P, int M) {
-    if(M>P.size()) return -1;
-    int l=0,r=0,ans=-1,n=P.size(); 
-    for(int i=0;i<P.size();i++)
-        r += P[i];
+int books(vector<int> &A, int B) {
+    if(B>A.size()) return -1;
+    int l=0,r=0,ans=-1,n=A.size(); 
+    for(int i=0;i<A.size();i++)
+        r += A[i];
         
     while(l<=r){
         int mid = (l+r)/2; 
         
-        if(possible(P,M,mid)){
+        if(possible(A,B,mid)){
             ans = mid;
             r = mid - 1;
         }
