@@ -28,44 +28,21 @@ typedef long double ld;
 using namespace std;
 
 void solveA(){
-    ll n;
+    int n;
     cin>>n;
-    ll count = 0;
-    if(n%2050!=0){cout<<-1<<endl;return;}
-    else{
-        while(n>0){
-            ll temp = 2050;
-            while(temp*10<=n){
-                temp*=10;
-            }
-            n-=temp;
-            count++;
-        }
+    string s;
+    cin>>s;
+    set<char> done;
+    char curr;
+    for(int i =0;i<n;i++){
+        if(done.find(s[i])!=done.end()&&curr!=s[i]){cout<<"NO"<<endl;return;}
+        if(curr!=s[i])curr=s[i];
+        done.insert(s[i]);
     }
-    cout<<count<<endl;
+    cout<<"YES"<<endl;
 }
 void solveB(){
-    int n,m;
-    cin>>n>>m;
-    int lengths[n][m];
-    for(int i =0 ;i<n;i++){
-        for(int j = 0;j<m;j++){
-            cin>>lengths[i][j];
-        }
-    }
-    int answer[n][m];
-    int minimum_lengths[n];
-    for(int i = 0;i<n;i++){
-        int min_val=INT_MAX;
-        int min_index = -1;
-        for(int j =0;j<m;j++){
-            if(min_val>lengths[i][j]){
-                min_val = lengths[i][j];
-                min_index = j;
-            }
-        }
-        minimum_lengths[i]=min_index;
-    }
+
 }
 void solveC(){
 
