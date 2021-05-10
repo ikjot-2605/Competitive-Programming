@@ -37,49 +37,55 @@ class Node{
             this->kids = {};
         }
 };
-
+int numberOfChildren(Node* root){
+    int answer = 0;
+    queue<Node*> q;
+    for(int i =0;i<root->kids.size();i++){
+        q.push(root->kids[i]);
+    }
+    while(!q.empty()){
+        Node *curr = q.front();
+        answer++;
+        q.pop();
+        for(int i =0;i<curr->kids.size();i++){
+            q.push(curr->kids[i]);
+        }
+    }
+    return answer;
+}
+bool compareKids(Node* node1,Node* node2){
+    return numberOfChildren(node1)>numberOfChildren(node2);
+}
 void solveA(){
     int n,x;
     cin>>n>>x;
     Node *root = new Node(1,x);
-    map<int,Node*> map;
-    vector<Node> hi;
-    for(int i =1;i<=n;i++){
-        Node node1(i,-1);
-        if(i==1)node1.value = x;
-        hi.push_back(node1);
-        map.insert(make_pair(i,&hi[i]));
+    vector<Node*> nodes(n);
+    nodes[0]=root;
+    for(int i =1;i<n;i++){
+        nodes[i] = new Node(i+1,-1);
     }
-    for(int i =1;i<=n;i++){
-        map[i]->id=i;
-        if(i!=1)map[i]->value = -1;
-        else map[i]->value = x;
-        map[i]->kids = {};
-    }
-    for(int i =0;i<n-1;i++){
-        int a,b;
-        cin>>a>>b;
-        if(a<b){
-            Node *val = map[b];
-            vector<Node*> vals = map[a]->kids;
-            vals.push_back(map[b]);
-            map[a]->kids = vals;
-        }
-        else{
-            map[b]->kids.push_back(map[a]);
-        }
+    for(int i = 0;i<n-1;i++){
+        int lesser,more;
+        cin>>lesser>>more;
+        if(lesser>more)swap(lesser,more);
+        nodes[lesser-1]->kids.push_back(nodes[more-1]);
     }
     queue<int> q;
     q.push(1);
-    ll answer=0;
+    ll answer = 0;
     while(!q.empty()){
-        int parent_id = q.front();
+        int val = q.front();
         q.pop();
-        answer = (answer+map[parent_id]->value)%M;
-        vector<Node*> kids = map[parent_id]->kids;
-        for(int i =0;i<kids.size();i++){
-            q.push(kids[i]->id);
-            kids[i]->value=(i+1)*map[parent_id]->value;
+        Node *currentParent = nodes[val-1];
+        answer = (answer+currentParent->value)%M;
+        vector<Node*> *kids = &(currentParent->kids);
+        for(int i = 0;i<n;i++){
+            sort((*kids).begin(),(*kids).end(),compareKids);
+        }
+        for(int i =0;i<(*kids).size();i++){
+            q.push((*kids)[i]->id);
+            (*kids)[i]->value = (i+1)*currentParent->value;
         }
     }
     cout<<answer<<endl;
