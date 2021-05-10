@@ -26,25 +26,27 @@ typedef long double ld;
 #define MAX 50
 using namespace std;
 
-vector<int> solve(string A)
-{
+string solve(string A)
+{   
     int n = A.length();
-    vector<int> arr(n);
-    for(int i =0;i<n;i++){
-        if(A[i]=='1')arr[i]=-1;
-        else arr[i]=1;
+    for(int i = n-2;i>=0;i-- ){
+        char min_char = '9';
+        int index = -1;
+        for(int j =i;j<n;j++){
+            if(A[j]>A[i]&&A[j]<=min_char){
+                min_char = A[j];
+                index = j;
+            }
+        }
+        if(index!=-1){
+            char temp = A[i];
+            A[i] = A[index];
+            A[index] = temp;
+            sort(A.begin()+i+1, A.end());
+            return A;
+        }
     }
-    int max_so_far = 0;
-    int max_ending_here = 0;
-    int L = 0,R=-1;
-    int newL = 0;
-    for(int i =0;i<n;i++){
-        max_ending_here = max_ending_here + arr[i];
-        if(max_ending_here<0){max_ending_here=0;newL=i+1;}
-        if(max_so_far<max_ending_here){max_so_far = max_ending_here;R=i;if(R>=newL)L=newL;}
-    }
-    if(L==-1||R==-1){return {};}
-    return {L+1,R+1};
+    return "-1";
 }
 
 int main()
@@ -52,15 +54,6 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     //vector<string> demo={"0.6","0.7","0.8"};
-    int T = 1;
-    cin >> T;
-    while (T--)
-    {
-        vector<int> ans = solve("1101");
-        for(int i =0;i<ans.size();i++){
-            cout<<ans[i]<<endl;
-        }
-    }
-
+    cout<<solve("892795")<<endl<<solve("218765")<<endl<<solve("4321")<<endl;
     return 0;
 }
