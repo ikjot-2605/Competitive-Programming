@@ -5,6 +5,7 @@
         "list": "cpp",
         "string": "cpp",
         "iostream": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "ostream": "cpp"
     }
 }
