@@ -30,6 +30,7 @@ class Node{
     public:
         int id;
         int value;
+        int parent;
         vector<Node*> kids;
         Node(int id,int value){
             this->id = id;
@@ -37,58 +38,24 @@ class Node{
             this->kids = {};
         }
 };
-int numberOfChildren(Node* root){
-    int answer = 0;
-    queue<Node*> q;
-    for(int i =0;i<root->kids.size();i++){
-        q.push(root->kids[i]);
-    }
-    while(!q.empty()){
-        Node *curr = q.front();
-        answer++;
-        q.pop();
-        for(int i =0;i<curr->kids.size();i++){
-            q.push(curr->kids[i]);
-        }
-    }
-    return answer;
-}
-bool compareKids(Node* node1,Node* node2){
-    return numberOfChildren(node1)>numberOfChildren(node2);
-}
+
 void solveA(){
     int n,x;
     cin>>n>>x;
     Node *root = new Node(1,x);
-    vector<Node*> nodes(n);
-    nodes[0]=root;
-    for(int i =1;i<n;i++){
-        nodes[i] = new Node(i+1,-1);
+    vector<Node*> nodes(n+1);
+    nodes[1]=root;
+    nodes[1]->parent=-1;
+    for(int i =2;i<=n;i++){
+        nodes[i] = new Node(i,-1);
     }
     for(int i = 0;i<n-1;i++){
         int lesser,more;
         cin>>lesser>>more;
         if(lesser>more)swap(lesser,more);
-        nodes[lesser-1]->kids.push_back(nodes[more-1]);
+        nodes[lesser]->kids.push_back(nodes[more]);
     }
-    queue<int> q;
-    q.push(1);
-    ll answer = 0;
-    while(!q.empty()){
-        int val = q.front();
-        q.pop();
-        Node *currentParent = nodes[val-1];
-        answer = (answer+currentParent->value)%M;
-        vector<Node*> *kids = &(currentParent->kids);
-        for(int i = 0;i<n;i++){
-            sort((*kids).begin(),(*kids).end(),compareKids);
-        }
-        for(int i =0;i<(*kids).size();i++){
-            q.push((*kids)[i]->id);
-            (*kids)[i]->value = (i+1)*currentParent->value;
-        }
-    }
-    cout<<answer<<endl;
+    
 }
 void solveB(){
 
