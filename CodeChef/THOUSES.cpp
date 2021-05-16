@@ -1,7 +1,6 @@
 
 /*COMPETITIVE PROGRAMMING C++ TEMPLATE */
 
-
 #include <algorithm>
 #include <vector>
 #include <set>
@@ -25,55 +24,90 @@ const long double PI = 3.141592653589793236L;
 typedef long long int ll;
 typedef long double ld;
 #define MAX 50
+#define int long long
 using namespace std;
-class Node{
-    public:
-        int id;
-        int value;
-        int parent;
-        vector<Node*> kids;
-        Node(int id,int value){
-            this->id = id;
-            this->value = value;
-            this->kids = {};
-        }
+class Node
+{
+public:
+    int id;
+    int value;
+    int parent;
+    vector<Node *> kids;
+    Node(int id, int value)
+    {
+        this->id = id;
+        this->value = value;
+        this->kids = {};
+    }
 };
-
-void solveA(){
-    int n,x;
-    cin>>n>>x;
-    Node *root = new Node(1,x);
-    vector<Node*> nodes(n+1);
-    nodes[1]=root;
-    nodes[1]->parent=-1;
-    for(int i =2;i<=n;i++){
-        nodes[i] = new Node(i,-1);
+vector<vector<int>> tree_matrix;
+vector<int> substi_val, val_vec;
+vector<pair<int, int>> char_matr;
+void dfs(int now_val, int last_val)
+{
+    for (auto x : tree_matrix[now_val])
+    {
+        if (x == last_val)
+            continue;
+        dfs(x, now_val);
     }
-    for(int i = 0;i<n-1;i++){
-        int lesser,more;
-        cin>>lesser>>more;
-        if(lesser>more)swap(lesser,more);
-        nodes[lesser]->kids.push_back(nodes[more]);
+    char_matr.clear();
+    for (auto x : tree_matrix[now_val])
+    {
+        if (x != last_val)
+            char_matr.push_back({substi_val[x], x});
     }
-    
+    sort(char_matr.rbegin(), char_matr.rend());
+    int total_val = 1;
+    for (int i = 0; i < char_matr.size(); i++)
+    {
+        val_vec[char_matr[i].second] += total_val++;
+    }
+    for (auto x : tree_matrix[now_val])
+    {
+        if (x != last_val)
+        {
+            substi_val[now_val] += val_vec[x] * substi_val[x];
+        }
+    }
 }
-void solveB(){
-
+void solveA()
+{
+    int n, x;
+    cin >> n >> x;
+    substi_val.assign(n, 1);
+    val_vec.assign(n, 0);
+    tree_matrix.clear();
+    tree_matrix.resize(n);
+    while (n-- > 1)
+    {
+        int u, v;
+        cin >> u >> v;
+        u--;
+        v--;
+        tree_matrix[u].push_back(v);
+        tree_matrix[v].push_back(u);
+    }
+    dfs(0, -1);
+    cout << substi_val[0] % M * x % M << endl;
 }
-void solveC(){
-
+void solveB()
+{
 }
-void solveD(){
-
+void solveC()
+{
 }
-void solveE(){
-
+void solveD()
+{
 }
-void solveF(){
-
+void solveE()
+{
+}
+void solveF()
+{
 }
 
-int main()
+signed main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
