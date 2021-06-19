@@ -1,28 +1,6 @@
 {
     "files.associations": {
-        "vector": "cpp",
-        "*.tcc": "cpp",
-        "list": "cpp",
-        "string": "cpp",
-        "iostream": "cpp",
-        "algorithm": "cpp",
-        "ostream": "cpp",
-        "iomanip": "cpp",
-        "climits": "cpp",
-        "array": "cpp",
-        "deque": "cpp",
-        "forward_list": "cpp",
-        "unordered_map": "cpp",
-        "unordered_set": "cpp",
-        "string_view": "cpp",
-        "initializer_list": "cpp",
-        "regex": "cpp",
-        "valarray": "cpp",
-        "numeric": "cpp",
-        "map": "cpp",
-        "xstring": "cpp",
-        "xtree": "cpp",
-        "set": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Enabled"
+        "xiosbase": "cpp",
+        "iostream": "cpp"
+    }
 }
