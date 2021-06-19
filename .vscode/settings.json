@@ -18,6 +18,11 @@
         "initializer_list": "cpp",
         "regex": "cpp",
         "valarray": "cpp",
-        "numeric": "cpp"
-    }
+        "numeric": "cpp",
+        "map": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "set": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }
